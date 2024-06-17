@@ -4,6 +4,9 @@ import com.vaibhav.productapp.entity.Product;
 import com.vaibhav.productapp.entity.User;
 import com.vaibhav.productapp.service.ProductService;
 import com.vaibhav.productapp.service.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,5 +46,13 @@ public class UserController {
     @PutMapping("/update/{id}")
     public User updateUser(@RequestBody User user, @PathVariable Long id ){
         return userService.updateUser(user ,id ) ;
+
+    }
+
+
+    @GetMapping("/products/{id}")
+    public ResponseEntity<List<Product>> getProductsByUserId(@PathVariable Long id){
+
+        return new ResponseEntity<>(userService.getProductsByUserId(id), HttpStatus.OK) ;
     }
 }

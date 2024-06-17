@@ -12,6 +12,11 @@ import java.util.List;
 public class UserService {
     UserRepo userRepo ;
 
+    public UserService(ProductRepo productRepo) {
+        this.productRepo = productRepo;
+    }
+
+    ProductRepo productRepo ;
     public UserService(UserRepo userRepo) {
         this.userRepo = userRepo;
     }
@@ -38,6 +43,10 @@ public class UserService {
 
     public User saveUser(User user){
         return userRepo.save(user);
+    }
+
+    public List<Product> getProductsByUserId(Long id){
+        return productRepo.findByUserId(id) ;
     }
 
 }
