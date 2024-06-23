@@ -1,11 +1,13 @@
 package com.vaibhav.productapp.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -15,6 +17,9 @@ public class User {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long userId ;
     private String name ;
+
+    @OneToMany(mappedBy = "User")
+    private List<Product>products;
 
     public Long getUserId() {
         return userId;
@@ -31,4 +36,15 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+
+    }
+
+
 }
